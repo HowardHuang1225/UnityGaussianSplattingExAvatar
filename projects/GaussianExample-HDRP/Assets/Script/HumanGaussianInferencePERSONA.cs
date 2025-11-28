@@ -67,14 +67,10 @@ public class HumanGaussianInferencePERSONA : MonoBehaviour
     private Dictionary<string, Tensor<float>> m_InputTensors = new Dictionary<string, Tensor<float>>();
 
     private readonly List<string> smplxKeysRefine = new List<string> {
-         "body_pose", "jaw_pose", "leye_pose", "reye_pose",
-        "lhand_pose", "rhand_pose", "expr"
+         "body_pose", "expr"
     };
     private readonly List<string> smplxKeysNoRefine = new List<string> {
          "expr"
-    };
-    private readonly List<string> outputKeys = new List<string> {
-        "mean_3d_refined", "rgb", "scale_refined"
     };
     private readonly List<string> smplxPosKeys = new List<string> {
          "root_pose","body_pose", "jaw_pose", "leye_pose", "reye_pose",
@@ -93,7 +89,7 @@ public class HumanGaussianInferencePERSONA : MonoBehaviour
         // 預先載入所有動畫資料
         PreloadAllMotionData();
 
-        //refine_runtimeModel = ModelLoader.Load(refine_modelAsset);
+        refine_runtimeModel = ModelLoader.Load(refine_modelAsset);
         no_refine_runtimeModel = ModelLoader.Load(no_refine_modelAsset);
         static_runtimeModel = ModelLoader.Load(static_modelAsset);
 
@@ -137,8 +133,10 @@ public class HumanGaussianInferencePERSONA : MonoBehaviour
 
         InitializeGpuData();
         InitializeJointPosData();
-
-        worker = new Worker(no_refine_runtimeModel, BackendType.GPUCompute);
+        if(refine)
+            worker = new Worker(refine_runtimeModel, BackendType.GPUCompute);
+        else
+            worker = new Worker(no_refine_runtimeModel, BackendType.GPUCompute);
         LoadInputsForFrame(0, true);
     }
 

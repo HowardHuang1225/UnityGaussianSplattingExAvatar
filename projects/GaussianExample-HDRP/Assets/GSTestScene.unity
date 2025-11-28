@@ -226,6 +226,218 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
+--- !u!1 &100981611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 100981615}
+  - component: {fileID: 100981614}
+  - component: {fileID: 100981613}
+  - component: {fileID: 100981612}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &100981612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100981611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 100981613}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &100981613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100981611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 100981614}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &100981614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100981611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &100981615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100981611}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
+--- !u!1 &160388166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 160388170}
+  - component: {fileID: 160388169}
+  - component: {fileID: 160388168}
+  - component: {fileID: 160388167}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &160388167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160388166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 160388168}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &160388168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160388166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 160388169}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &160388169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160388166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &160388170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160388166}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0.6, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
 --- !u!1 &231550833
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +892,324 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
+--- !u!1 &501069772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 501069776}
+  - component: {fileID: 501069775}
+  - component: {fileID: 501069774}
+  - component: {fileID: 501069773}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &501069773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501069772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 501069774}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &501069774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501069772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 501069775}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &501069775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501069772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &501069776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501069772}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0.3, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
+--- !u!1 &554381372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 554381376}
+  - component: {fileID: 554381375}
+  - component: {fileID: 554381374}
+  - component: {fileID: 554381373}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &554381373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554381372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 554381374}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &554381374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554381372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 554381375}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &554381375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554381372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &554381376
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554381372}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: -1.2, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
+--- !u!1 &615910919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 615910923}
+  - component: {fileID: 615910922}
+  - component: {fileID: 615910921}
+  - component: {fileID: 615910920}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &615910920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615910919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 615910921}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &615910921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615910919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 615910922}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &615910922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615910919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &615910923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615910919}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: -0.6, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
 --- !u!1 &942738405
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +1228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &942738406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,7 +1245,7 @@ MonoBehaviour:
   setPose: 1
   drawGizmos: 1
   jointColor: {r: 0, g: 1, b: 0, a: 1}
-  jointRadius: 0.05
+  jointRadius: 0.01
   boneColor: {r: 1, g: 1, b: 1, a: 1}
   LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
 --- !u!114 &942738407
@@ -731,7 +1261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
-  refine_modelAsset: {fileID: 0}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
   static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
   tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
   motionFolderName: smplx_params_smoothed
@@ -780,7 +1310,113 @@ Transform:
   m_GameObject: {fileID: 942738405}
   serializedVersion: 2
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: 0.254, z: 0.793}
+  m_LocalPosition: {x: 1.5, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
+--- !u!1 &947156697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 947156701}
+  - component: {fileID: 947156700}
+  - component: {fileID: 947156699}
+  - component: {fileID: 947156698}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &947156698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947156697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 947156699}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &947156699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947156697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 947156700}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &947156700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947156697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &947156701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947156697}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: -0.9, y: 0.254, z: 0.793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -888,6 +1524,112 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: -0.9, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
+--- !u!1 &1136723832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136723836}
+  - component: {fileID: 1136723835}
+  - component: {fileID: 1136723834}
+  - component: {fileID: 1136723833}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1136723833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136723832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 1136723834}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &1136723834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136723832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 1136723835}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &1136723835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136723832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &1136723836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136723832}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0.9, y: 0.254, z: 0.793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1305,25 +2047,131 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462254335}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38bf645c127d1204ea55eec2191ed012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToActivate:
-  - {fileID: 1609192433}
-  - {fileID: 1857793372}
-  - {fileID: 1482169487}
-  - {fileID: 260952012}
-  - {fileID: 1987056751}
-  - {fileID: 1424774967}
-  - {fileID: 2105884898}
-  - {fileID: 336441660}
-  - {fileID: 964917154}
-  - {fileID: 4534461}
+  - {fileID: 942738405}
+  - {fileID: 1479494698}
+  - {fileID: 1136723832}
+  - {fileID: 160388166}
+  - {fileID: 501069772}
+  - {fileID: 100981611}
+  - {fileID: 2130091609}
+  - {fileID: 615910919}
+  - {fileID: 947156697}
+  - {fileID: 554381372}
   interval: 5
   deactivateAllOnStart: 0
   beginOnStart: 1
+--- !u!1 &1479494698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1479494702}
+  - component: {fileID: 1479494701}
+  - component: {fileID: 1479494700}
+  - component: {fileID: 1479494699}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1479494699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479494698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 1479494700}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &1479494700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479494698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 1479494701}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &1479494701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479494698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &1479494702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479494698}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 1.2, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
 --- !u!1 &1482169487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,7 +2297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1609192434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1518,7 +2366,7 @@ MonoBehaviour:
   splatCount: 0
   smplxPose: []
   smplxPoseTrans: {x: 0, y: 0, z: 0}
-  refine: 0
+  refine: 1
 --- !u!114 &1609192437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1918,6 +2766,112 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
+--- !u!1 &2130091609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2130091613}
+  - component: {fileID: 2130091612}
+  - component: {fileID: 2130091611}
+  - component: {fileID: 2130091610}
+  m_Layer: 0
+  m_Name: GaussianSplatsPERSONA (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2130091610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130091609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5bb0657f75184abae260cc26e0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanGaussianInference: {fileID: 2130091611}
+  setPose: 1
+  drawGizmos: 1
+  jointColor: {r: 0, g: 1, b: 0, a: 1}
+  jointRadius: 0.01
+  boneColor: {r: 1, g: 1, b: 1, a: 1}
+  LBSComputeShader: {fileID: 7200000, guid: 961ec0e25ffebb940a4da7a272032cf5, type: 3}
+--- !u!114 &2130091611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130091609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e845ae066f9c54c8065956240a67d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  no_refine_modelAsset: {fileID: 5022602860645237092, guid: 0503f43e4131a864cafe100670f41066, type: 3}
+  refine_modelAsset: {fileID: 5022602860645237092, guid: 67a7f6f626d0fae439056cdd706eefc5, type: 3}
+  static_modelAsset: {fileID: 5022602860645237092, guid: b11f5728bf66f1a49bef0c6f4bdab362, type: 3}
+  tensorCopyShader: {fileID: 7200000, guid: 619c078d4ffbe0047b73b20bfc8628ee, type: 3}
+  motionFolderName: smplx_params_smoothed
+  frameIndex: 0
+  play: 1
+  playFps: 30
+  Fps: 0
+  gaussianSplatRenderer: {fileID: 2130091612}
+  splatCount: 0
+  smplxPose: []
+  smplxPoseTrans: {x: 0, y: 0, z: 0}
+  refine: 0
+--- !u!114 &2130091612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130091609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12d929a7f62c48adbe9ff45c9a33ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Asset: {fileID: 11400000, guid: 9293c14e2ffc7f140a1d3adfc72470e6, type: 2}
+  m_RenderOrder: 5
+  m_SplatScale: 1
+  m_OpacityScale: 1
+  m_SHOrder: 3
+  m_SHOnly: 0
+  m_SortNthFrame: 1
+  m_RenderMode: 0
+  m_PointDisplaySize: 3
+  m_Cutouts: []
+  m_ShaderSplats: {fileID: 4800000, guid: ed800126ae8844a67aad1974ddddd59c, type: 3}
+  m_ShaderComposite: {fileID: 4800000, guid: 7e184af7d01193a408eb916d8acafff9, type: 3}
+  m_ShaderDebugPoints: {fileID: 4800000, guid: b44409fc67214394f8f47e4e2648425e, type: 3}
+  m_ShaderDebugBoxes: {fileID: 4800000, guid: 4006f2680fd7c8b4cbcb881454c782be, type: 3}
+  m_CSSplatUtilities: {fileID: 7200000, guid: ec84f78b836bd4f96a105d6b804f08bd, type: 3}
+--- !u!4 &2130091613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130091609}
+  serializedVersion: 2
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: -0.3, y: 0.254, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: -51.304993, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1927,6 +2881,15 @@ SceneRoots:
   - {fileID: 1809080842}
   - {fileID: 1609192435}
   - {fileID: 942738409}
+  - {fileID: 1479494702}
+  - {fileID: 1136723836}
+  - {fileID: 160388170}
+  - {fileID: 501069776}
+  - {fileID: 100981615}
+  - {fileID: 2130091613}
+  - {fileID: 615910923}
+  - {fileID: 947156701}
+  - {fileID: 554381376}
   - {fileID: 1857793376}
   - {fileID: 1482169491}
   - {fileID: 260952016}
