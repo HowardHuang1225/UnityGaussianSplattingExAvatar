@@ -43,11 +43,20 @@ public class SkeletonBuilder : MonoBehaviour
 
     void OnEnable()
     {
-        parentArray = humanGaussianInference.ParentsTensor.DownloadToArray();
-        float[] fPoseLocalPositions = humanGaussianInference.JointZeroPoseTensor.DownloadToArray();
-        tPoseLocalPositions = ConvertFloatToVector3Array(fPoseLocalPositions);
-        float[] fTransformMatNeutralPose = humanGaussianInference.TransformMatNeutralPoseTensor.DownloadToArray();
-        mTransformMatNeutralPose = ConvertFloatToMatrix4x4(fTransformMatNeutralPose);
+        if (humanGaussianInference.useONNX)
+        {
+            parentArray = humanGaussianInference.ParentsTensor.DownloadToArray();
+            float[] fPoseLocalPositions = humanGaussianInference.JointZeroPoseTensor.DownloadToArray();
+            tPoseLocalPositions = ConvertFloatToVector3Array(fPoseLocalPositions);
+            float[] fTransformMatNeutralPose = humanGaussianInference.TransformMatNeutralPoseTensor.DownloadToArray();
+            mTransformMatNeutralPose = ConvertFloatToMatrix4x4(fTransformMatNeutralPose);
+        }
+        else
+        {
+            parentArray = humanGaussianInference.bakedParentsArray;
+            tPoseLocalPositions = ConvertFloatToVector3Array(humanGaussianInference.bakedJointZeroPoseArray);
+            mTransformMatNeutralPose = ConvertFloatToMatrix4x4(humanGaussianInference.bakedTransformMatNeutralPoseArray);
+        }
 
         m_LBSComputeKernel = LBSComputeShader.FindKernel("CSMain");
     }
@@ -71,7 +80,6 @@ public class SkeletonBuilder : MonoBehaviour
     /// </summary>
     public void DispatchLBS()
     {
-        var SkinningWeightTensorData = ComputeTensorData.Pin(humanGaussianInference.SkinningWeightTensor);
         if (LBSComputeShader == null || skinningMatrix == null || skinningMatrix.Length == 0)
         {
             Debug.LogError("LBS Compute Shader 或 Skinning Matrix 未設置！");
@@ -89,7 +97,17 @@ public class SkeletonBuilder : MonoBehaviour
 
         // 3. 設置 Shader 的輸入和輸出緩衝區
         LBSComputeShader.SetBuffer(kernel, "_SourcePos", humanGaussianInference.m_GpuPosData);
-        LBSComputeShader.SetBuffer(kernel, "_SkinningWeights", SkinningWeightTensorData.buffer);
+        
+        if (humanGaussianInference.useONNX)
+        {
+            var SkinningWeightTensorData = ComputeTensorData.Pin(humanGaussianInference.SkinningWeightTensor);
+            LBSComputeShader.SetBuffer(kernel, "_SkinningWeights", SkinningWeightTensorData.buffer);
+        }
+        else
+        {
+            LBSComputeShader.SetBuffer(kernel, "_SkinningWeights", humanGaussianInference.m_BakedSkinningWeightBuffer);
+        }
+
         LBSComputeShader.SetBuffer(kernel, "_SkinningMatrices", m_SkinningMatrixBuffer);
 
         // 從 Renderer 獲取目標位置緩衝區並設置

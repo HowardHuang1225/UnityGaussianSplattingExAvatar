@@ -30,6 +30,26 @@ public class HumanGaussianInference : MonoBehaviour
     private int m_TensorCopyKernel;
     //public bool cpuCopy;
 
+    public bool useONNX = true;
+
+    [Header("Baked Binary Data")]
+    public TextAsset bakedMean3d;
+    public TextAsset bakedScale;
+    public TextAsset bakedRGB;
+    public TextAsset bakedJointZeroPose;
+    public TextAsset bakedParents;
+    public TextAsset bakedTransformMatNeutralPose;
+    public TextAsset bakedSkinningWeight;
+
+    // Binary Mode Data
+    [HideInInspector] public float[] bakedJointZeroPoseArray;
+    [HideInInspector] public int[] bakedParentsArray;
+    [HideInInspector] public float[] bakedTransformMatNeutralPoseArray;
+    [HideInInspector] public ComputeBuffer m_BakedSkinningWeightBuffer;
+    private ComputeBuffer m_BakedMean3dBuffer;
+    private ComputeBuffer m_BakedRGBBuffer;
+    private ComputeBuffer m_BakedScaleBuffer;
+
     [Header("Animation Data")]
     public string motionFolderName = "smplx_params_smoothed";
     private List<Dictionary<string, JToken>> m_AllFramesData;
@@ -95,6 +115,29 @@ public class HumanGaussianInference : MonoBehaviour
         // 預先載入所有動畫資料
         PreloadAllMotionData();
 
+        if (tensorCopyShader != null)
+        {
+            m_TensorCopyKernel = tensorCopyShader.FindKernel("CSMain");
+        }
+        else
+        {
+            Debug.LogError("TensorCopyShader 未在 InferenceRenderManager 中指定！");
+        }
+
+        InitializeGpuData();
+
+        if (useONNX)
+        {
+            InitializeONNX();
+        }
+        else
+        {
+            InitializeFromBakedData();
+        }
+    }
+
+    private void InitializeONNX()
+    {
         refine_runtimeModel = ModelLoader.Load(refine_modelAsset);
         no_refine_runtimeModel = ModelLoader.Load(no_refine_modelAsset);
         static_runtimeModel = ModelLoader.Load(static_modelAsset);
@@ -111,7 +154,6 @@ public class HumanGaussianInference : MonoBehaviour
                 {
                     float[] values = smplxData[key].ToObject<float[]>();
                     int length = values.Length;
-                    // 建立 Tensor 並存入字典中
                     m_InputTensors[key] = new Tensor<float>(new TensorShape(length), values);
                 }
             }
@@ -119,29 +161,77 @@ public class HumanGaussianInference : MonoBehaviour
         else
         {
             Debug.LogError($"無法找到第一幀的資料檔來初始化 Tensors: {firstFramePath}");
-            // 你也可以在這裡根據模型的已知輸入形狀手動建立 Tensors
         }
 
         static_worker = new Worker(static_runtimeModel, BackendType.GPUCompute);
-        //LoadInputsForFrame(0,true);
-        //cb = new CommandBuffer();
-        //cb.ScheduleWorker(static_worker);
         Debug.Log("ONNX Model loaded successfully.");
 
-        if (tensorCopyShader != null)
-        {
-            m_TensorCopyKernel = tensorCopyShader.FindKernel("CSMain");
-        }
-        else
-        {
-            Debug.LogError("TensorCopyShader 未在 InferenceRenderManager 中指定！");
-        }
-
-        InitializeGpuData();
         InitializeJointPosData();
 
         worker = new Worker(refine_runtimeModel, BackendType.GPUCompute);
         LoadInputsForFrame(0, true);
+    }
+
+    private void InitializeFromBakedData()
+    {
+        if (bakedMean3d == null || bakedScale == null || bakedRGB == null || 
+            bakedJointZeroPose == null || bakedParents == null || 
+            bakedTransformMatNeutralPose == null || bakedSkinningWeight == null)
+        {
+            Debug.LogError("Binary baked data is missing!");
+            return;
+        }
+
+        // 1. Load Skeleton Data
+        bakedJointZeroPoseArray = new float[bakedJointZeroPose.bytes.Length / 4];
+        Buffer.BlockCopy(bakedJointZeroPose.bytes, 0, bakedJointZeroPoseArray, 0, bakedJointZeroPose.bytes.Length);
+
+        bakedParentsArray = new int[bakedParents.bytes.Length / 4];
+        Buffer.BlockCopy(bakedParents.bytes, 0, bakedParentsArray, 0, bakedParents.bytes.Length);
+
+        bakedTransformMatNeutralPoseArray = new float[bakedTransformMatNeutralPose.bytes.Length / 4];
+        Buffer.BlockCopy(bakedTransformMatNeutralPose.bytes, 0, bakedTransformMatNeutralPoseArray, 0, bakedTransformMatNeutralPose.bytes.Length);
+
+        // 2. Load Weights into Compute Buffer
+        m_BakedSkinningWeightBuffer = new ComputeBuffer(bakedSkinningWeight.bytes.Length / 4, 4);
+        m_BakedSkinningWeightBuffer.SetData(bakedSkinningWeight.bytes);
+
+        // 3. Load Static Splat Data
+        splatCount = (uint)(bakedMean3d.bytes.Length / (3 * 4));
+        m_BakedMean3dBuffer = new ComputeBuffer((int)splatCount * 3, 4);
+        m_BakedMean3dBuffer.SetData(bakedMean3d.bytes);
+
+        m_BakedRGBBuffer = new ComputeBuffer((int)splatCount * 3, 4);
+        m_BakedRGBBuffer.SetData(bakedRGB.bytes);
+
+        m_BakedScaleBuffer = new ComputeBuffer((int)splatCount * 3, 4);
+        m_BakedScaleBuffer.SetData(bakedScale.bytes);
+
+        // 4. One-time copy to Renderer
+        using (CommandBuffer cmd = new CommandBuffer())
+        {
+            cmd.name = "Initialize Splats from Binary";
+            var rgbDestinationTexture = gaussianSplatRenderer.GetGpuColorData();
+            var otherDestinationBuffer = gaussianSplatRenderer.GetGpuOtherData();
+
+            if (m_GpuPosData != null && rgbDestinationTexture != null && otherDestinationBuffer != null)
+            {
+                cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourcePos", m_BakedMean3dBuffer);
+                cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourceRGB", m_BakedRGBBuffer);
+                cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourceScale", m_BakedScaleBuffer);
+                cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationPos", m_GpuPosData);
+                cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationOther", otherDestinationBuffer);
+                cmd.SetComputeTextureParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationRGB", rgbDestinationTexture);
+                cmd.SetComputeIntParam(tensorCopyShader, "_SplatCount", (int)splatCount);
+
+                int threadGroups = ((int)splatCount + 1023) / 1024;
+                cmd.DispatchCompute(tensorCopyShader, m_TensorCopyKernel, threadGroups, 1, 1);
+            }
+            Graphics.ExecuteCommandBuffer(cmd);
+        }
+
+        LoadInputsForFrame(0, false);
+        Debug.Log("Binary Baked Data loaded successfully.");
     }
 
 
@@ -195,7 +285,7 @@ public class HumanGaussianInference : MonoBehaviour
 
     void Update()
     {
-        if (refine != _refine)
+        if (useONNX && refine != _refine)
         {
             _refine = refine;
             if (refine)
@@ -229,69 +319,67 @@ public class HumanGaussianInference : MonoBehaviour
         }
 
         // --- 為每一幀重建 CommandBuffer ---
-        // 建立一個臨時的 CommandBuffer 或清除舊的
-        // 使用 CommandBufferPool 會更有效率，但為了簡單起見，我們先 new 一個
-        using (CommandBuffer cmd = new CommandBuffer())
+        if (useONNX)
         {
-            cmd.name = "Human Gaussian Inference";
-
-            // 1. 將 ONNX Worker 加入 Buffer
-            cmd.ScheduleWorker(worker);
-
-            // --- 更新公開的 Tensor 屬性 ---
-            if (refine)
+            using (CommandBuffer cmd = new CommandBuffer())
             {
-                PosOutputTensor = worker.PeekOutput("mean_3d_refined") as Tensor<float>;
-                //RGBOutputTensor = worker.PeekOutput("rgb") as Tensor<float>;
-                ScaleOutputTensor = worker.PeekOutput("scale_refined") as Tensor<float>;
-            }
-            else
-            {
-                PosOutputTensor = worker.PeekOutput("mean_3d") as Tensor<float>;
-                //RGBOutputTensor = worker.PeekOutput("rgb") as Tensor<float>;
-                ScaleOutputTensor = worker.PeekOutput("scale") as Tensor<float>;
-            }
-            
+                cmd.name = "Human Gaussian Inference";
 
-            
-             
-            {
-                // --- GPU 複製操作 ---
-                var posComputeTensorData = ComputeTensorData.Pin(PosOutputTensor);
-                var rgbComputeTensorData = ComputeTensorData.Pin(RGBOutputTensor);
-                var scaleComputeTensorData = ComputeTensorData.Pin(ScaleOutputTensor);
+                // 1. 將 ONNX Worker 加入 Buffer
+                cmd.ScheduleWorker(worker);
 
-                var posSourceBuffer = posComputeTensorData.buffer;
-                var rgbSourceBuffer = rgbComputeTensorData.buffer;
-                var scaleSourceBuffer = scaleComputeTensorData.buffer;
-
-                var otherDestinationBuffer = gaussianSplatRenderer.GetGpuOtherData();
-                var rgbDestinationTexture = gaussianSplatRenderer.GetGpuColorData();
-
-                splatCount = (uint)PosOutputTensor.shape.length / 3;
-
-                if (m_GpuPosData != null && rgbDestinationTexture != null && otherDestinationBuffer != null)
+                // --- 更新公開的 Tensor 屬性 ---
+                if (refine)
                 {
-                    // 2. 將 Compute Shader 的參數設定加入 Buffer
-                    cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourcePos", posSourceBuffer);
-                    cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourceRGB", rgbSourceBuffer);
-                    cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourceScale", scaleSourceBuffer);
-                    cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationPos", m_GpuPosData);
-                    cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationOther", otherDestinationBuffer);
-                    cmd.SetComputeTextureParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationRGB", rgbDestinationTexture);
-                    cmd.SetComputeIntParam(tensorCopyShader, "_SplatCount", (int)splatCount);
-
-                    // 3. 將 Dispatch 命令加入 Buffer
-                    int threadGroups = ((int)splatCount + 1023) / 1024; // 修正：常見的整數除法進位寫法
-                    cmd.DispatchCompute(tensorCopyShader, m_TensorCopyKernel, threadGroups, 1, 1);
+                    PosOutputTensor = worker.PeekOutput("mean_3d_refined") as Tensor<float>;
+                    //RGBOutputTensor = worker.PeekOutput("rgb") as Tensor<float>;
+                    ScaleOutputTensor = worker.PeekOutput("scale_refined") as Tensor<float>;
                 }
                 else
                 {
-                    Debug.LogError("一個或多個目標緩衝區為空！");
+                    PosOutputTensor = worker.PeekOutput("mean_3d") as Tensor<float>;
+                    //RGBOutputTensor = worker.PeekOutput("rgb") as Tensor<float>;
+                    ScaleOutputTensor = worker.PeekOutput("scale") as Tensor<float>;
                 }
 
-                // 4. 一次性執行所有命令 (ONNX 推理 + Compute Shader 複製)
-                Graphics.ExecuteCommandBuffer(cmd);
+                {
+                    // --- GPU 複製操作 ---
+                    var posComputeTensorData = ComputeTensorData.Pin(PosOutputTensor);
+                    var rgbComputeTensorData = ComputeTensorData.Pin(RGBOutputTensor);
+                    var scaleComputeTensorData = ComputeTensorData.Pin(ScaleOutputTensor);
+
+                    var posSourceBuffer = posComputeTensorData.buffer;
+                    var rgbSourceBuffer = rgbComputeTensorData.buffer;
+                    var scaleSourceBuffer = scaleComputeTensorData.buffer;
+
+                    var otherDestinationBuffer = gaussianSplatRenderer.GetGpuOtherData();
+                    var rgbDestinationTexture = gaussianSplatRenderer.GetGpuColorData();
+
+                    splatCount = (uint)PosOutputTensor.shape.length / 3;
+
+                    if (m_GpuPosData != null && rgbDestinationTexture != null && otherDestinationBuffer != null)
+                    {
+                        // 2. 將 Compute Shader 的參數設定加入 Buffer
+                        cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourcePos", posSourceBuffer);
+                        cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourceRGB", rgbSourceBuffer);
+                        cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_SourceScale", scaleSourceBuffer);
+                        cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationPos", m_GpuPosData);
+                        cmd.SetComputeBufferParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationOther", otherDestinationBuffer);
+                        cmd.SetComputeTextureParam(tensorCopyShader, m_TensorCopyKernel, "_DestinationRGB", rgbDestinationTexture);
+                        cmd.SetComputeIntParam(tensorCopyShader, "_SplatCount", (int)splatCount);
+
+                        // 3. 將 Dispatch 命令加入 Buffer
+                        int threadGroups = ((int)splatCount + 1023) / 1024; // 修正：常見的整數除法進位寫法
+                        cmd.DispatchCompute(tensorCopyShader, m_TensorCopyKernel, threadGroups, 1, 1);
+                    }
+                    else
+                    {
+                        Debug.LogError("一個或多個目標緩衝區為空！");
+                    }
+
+                    // 4. 一次性執行所有命令 (ONNX 推理 + Compute Shader 複製)
+                    Graphics.ExecuteCommandBuffer(cmd);
+                }
             }
         }
     }
@@ -468,6 +556,11 @@ public class HumanGaussianInference : MonoBehaviour
 
         m_GpuPosData?.Release();
         m_GpuPosData = null;
+
+        m_BakedSkinningWeightBuffer?.Release();
+        m_BakedMean3dBuffer?.Release();
+        m_BakedRGBBuffer?.Release();
+        m_BakedScaleBuffer?.Release();
 
         worker?.Dispose();
         static_worker?.Dispose();
