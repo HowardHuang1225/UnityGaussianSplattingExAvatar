@@ -27,3 +27,4 @@
 *.sln.DotSettings.user
 /projects/GaussianExample-HDRP/Assets/StreamingAssets
 *.onnx
+*.meta
